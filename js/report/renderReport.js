@@ -5,7 +5,7 @@ export const renderReport = data => {
 	reportOperationListNode.innerHTML = '';
 
 	const reportRows = data.map(
-		({ type, amount, description, category, date }) => {
+		({ id, type, amount, description, category, date }) => {
 			const reportRow = document.createElement('tr'),
 				reportCategoryTd = document.createElement('td'),
 				reportAmountTd = document.createElement('td'),
@@ -30,6 +30,10 @@ export const renderReport = data => {
 			reportDateTd.textContent = reformatDate(date);
 			reportActionTd.textContent = typeOperations[type];
 			reportRemoveRow.innerHTML = '&#10006';
+
+			reportRemoveRow.addEventListener('click', () => {
+				console.log('remove element');
+			});
 
 			reportRemoveTd.append(reportRemoveRow);
 			reportRow.append(
