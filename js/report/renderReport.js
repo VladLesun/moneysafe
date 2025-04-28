@@ -1,4 +1,6 @@
+import { financeControl } from '../finance/financeControl.js';
 import { reformatDate } from '../modules/reformatDate.js';
+import { removeDate } from '../modules/service.js';
 import { reportOperationListNode, typeOperations } from '../vars/const.js';
 
 export const renderReport = data => {
@@ -31,8 +33,11 @@ export const renderReport = data => {
 			reportActionTd.textContent = typeOperations[type];
 			reportRemoveRow.innerHTML = '&#10006';
 
-			reportRemoveRow.addEventListener('click', () => {
-				console.log('remove element');
+			reportRemoveRow.addEventListener('click', async () => {
+				await removeDate(`/finance/${id}`);
+				reportRow.remove();
+				financeControl();
+				// clearChart();
 			});
 
 			reportRemoveTd.append(reportRemoveRow);

@@ -1,10 +1,13 @@
-import { getDate } from '../modules/getData.js';
+import { getData } from '../modules/service.js';
 import {
 	financeReportBtnNode,
+	generateChartButtonNode,
 	reportDatesNode,
 	reportNode,
 } from '../vars/const.js';
 import { renderReport } from './renderReport.js';
+
+let actualData = [];
 
 const closeReport = ({ target }) => {
 	if (
@@ -39,9 +42,11 @@ const openReport = () => {
 
 export const reportControl = () => {
 	financeReportBtnNode.addEventListener('click', async () => {
+		financeReportBtnNode.textContent = 'Загрузка...';
 		openReport();
-		const data = await getDate('/test');
-		renderReport(data);
+		actualData = await getData('/finance');
+		renderReport(actualData);
+		financeReportBtnNode.textContent = 'Отчет';
 	});
 
 	reportDatesNode.addEventListener('submit', async event => {
@@ -61,9 +66,14 @@ export const reportControl = () => {
 
 		const queryString = searchParams.toString();
 
-		const url = queryString ? `/test?${queryString}` : '/test';
+		const url = queryString ? `/finance?${queryString}` : '/finance';
 
-		const data = await getDate(url);
-		renderReport(data);
+		actualData = await getData(url);
+
+		renderReport(actualData);
 	});
 };
+
+generateChartButtonNode.addEventListener('click', () => {
+	generateChart();
+});
