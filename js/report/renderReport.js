@@ -1,4 +1,5 @@
 import { financeControl } from '../finance/financeControl.js';
+import { clearChart } from '../modules/generateChart.js';
 import { reformatDate } from '../modules/reformatDate.js';
 import { removeDate } from '../modules/service.js';
 import { reportOperationListNode, typeOperations } from '../vars/const.js';
@@ -37,7 +38,7 @@ export const renderReport = data => {
 				await removeDate(`/finance/${id}`);
 				reportRow.remove();
 				financeControl();
-				// clearChart();
+				clearChart();
 			});
 
 			reportRemoveTd.append(reportRemoveRow);

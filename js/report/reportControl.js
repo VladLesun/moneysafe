@@ -1,3 +1,4 @@
+import { clearChart, generateChart } from '../modules/generateChart.js';
 import { getData } from '../modules/service.js';
 import {
 	financeReportBtnNode,
@@ -71,9 +72,10 @@ export const reportControl = () => {
 		actualData = await getData(url);
 
 		renderReport(actualData);
+		clearChart();
 	});
 };
 
 generateChartButtonNode.addEventListener('click', () => {
-	generateChart();
+	generateChart(actualData);
 });

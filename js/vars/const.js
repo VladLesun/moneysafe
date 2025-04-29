@@ -11,8 +11,9 @@ export const financeReportBtnNode = document.querySelector('.finance__report'),
 
 // chart
 export const generateChartButtonNode = document.getElementById(
-	'generateChartButton'
-);
+		'generateChartButton'
+	),
+	reportChartNode = document.querySelector('.report__chart');
 
 // type operations
 export const typeOperations = {
